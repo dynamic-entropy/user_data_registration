@@ -13,7 +13,7 @@ def create_rule(client, dids, options, dry_run=False):
     return client.add_replication_rule(
         dids=dids,
         copies=1,
-        rse_expression=rse_exp,
+        rse_expression=rse_expression,
         grouping="ALL",
         activity="User Subscriptions",
         priority=1,
