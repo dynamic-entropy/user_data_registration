@@ -1,0 +1,19 @@
+{
+    "account":{
+        "username" : "rchauhan",
+        "account_type": "user"
+    },
+    "upload":{
+        "file_mode": "pfns_list",
+        "prefix_to_trim" : "root://deepthought.crc.nd.edu//store/user/awightma",
+        "dest_temp_rse" : "T3_US_NotreDame_Temp",
+        "files_per_block": 100
+    },
+    "rule":{
+        "dest_rse_expression": "T2_CH_CERN",
+        "lifetime": null,
+        "copies": 1,
+        "ask_approval": false
+    }
+}
+
