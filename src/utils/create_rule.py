@@ -7,7 +7,7 @@ def create_rule(client, dids, options, dry_run=False):
     ask_approval = options["ask_approval"]
 
     if dry_run:
-        print(f"A rule will be created on {dids} at {rse_expression} for {lifetime|"Infinity"}")
+        print(f"A rule will be created on {dids} at {rse_expression} for { lifetime if lifetime else 'Infinity'}")
         return ["DryRun"]
 
     return client.add_replication_rule(

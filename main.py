@@ -11,7 +11,7 @@ from src.utils.prepare_transfer import get_src_and_dst_list
 from src.utils.fts_transfer import get_context, check_status, do_transfer
 from src.utils.register_files import register_temp_replicas
 from src.utils.register_blocks_and_containers import create_block_file_map, register_blocks, register_dataset
-from src.utils.create_rule improt create_rule
+from src.utils.create_rule import create_rule
 
 
 FTS_ENDPOINT = "https://fts3-cms.cern.ch:8446/"
@@ -95,9 +95,9 @@ if __name__ == "__main__":
         # 4. Create Rules
 
 
-        rule_did = {"scope": rscope, "name": dataset_name}
+        rule_did = {"scope": rscope, "name": dataset}
         rule_id = create_rule(client=rclient, dids=[rule_did], options=rule_options, dry_run=dry_run)
         rule_id = rule_id[0]
-    # printC(f"Rule created for dataset: {dataset_name}", bcolors.OKGREEN)
-    # printC(f"https://cms-rucio-webui.cern.ch/rule?rule_id={rule_id}", bcolors.OKBLUE)
+        printC(f"Rule created for dataset: {dataset}", bcolors.OKGREEN)
+        printC(f"https://cms-rucio-webui.cern.ch/rule?rule_id={rule_id}", bcolors.OKBLUE)
 
