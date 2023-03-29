@@ -3,7 +3,7 @@ import uuid
 
 
 def get_regexp():
-    #TODO: (if required) Define regex if dataset names need to be created from file names
+    # TODO: (if required) Define regex if dataset names need to be created from file names
     """
     """
     regex = r"/store/group/rucio/pog_tau_group/ul_embedding/large_miniAOD_v2/(.*?)/(.*?)/(.*?)/(.*?)/.*"
@@ -11,7 +11,7 @@ def get_regexp():
 
 
 def convert_filename_to_dataset(file):
-    #TODO: if the use case ever arises, just accept regex and send it to above (get_regexp) function
+    # TODO: if the use case ever arises, just accept regex and send it to above (get_regexp) function
     matches = re.findall(get_regexp(), file)
     final_state, primary_dataset, datatier, campaign = matches[0]
     datatier = "USER"
@@ -31,7 +31,7 @@ def get_dataset_name(lfns):
 
 
 def create_block_file_map(dataset_name, lfns, block_limit=100):
-    
+
     # To get dataset name from filename
     # dataset_name = get_dataset_name(lfns)
     blocks = {}

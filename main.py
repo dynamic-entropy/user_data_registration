@@ -18,14 +18,10 @@ FTS_ENDPOINT = "https://fts3-cms.cern.ch:8446/"
 
 user_proxy = os.environ["X509_USER_PROXY"]
 
-# from s1_gfal_transfer import copyFiles
-# from s2_register_files import register_temp_replicas
-# from s3_register_blocks_and_containers import create_block_file_map, register_blocks, register_dataset
-
 if __name__ == "__main__":
 
     parser = ArgumentParser(prog='Rucio user file registration')
-    parser.add_argument("upload_filename", help="json file with dataset name and filename map" )
+    parser.add_argument("upload_filename", help="json file with dataset name and filename map")
     parser.add_argument("options_filename", help="json file containing options for the upload operation")
     parser.add_argument("-o", "--overwrite", action='store_true')
     parser.add_argument("-d", "--dry-run", action='store_true')
@@ -50,7 +46,6 @@ if __name__ == "__main__":
     with open(args.upload_filename, "r") as f:
         dataset_files_map = json.load(f)
 
-
     # Transfer files from source to temp rses
 
     for dataset, files in dataset_files_map.items():
@@ -66,23 +61,19 @@ if __name__ == "__main__":
                 time.sleep(60)
                 job_status = check_status(fts_context, job_id)
                 job_state = job_status["job_state"]
-                print('.',end='')
+                print('.', end='')
 
             print(f"\n Tranfer Job {job_state}")
-
-
-
 
         raccount = account_options["username"]
         rscope = f'{account_options["account_type"]}.{account_options["username"]}'
         rclient = Client(account=raccount)
         files_per_block = upload_options["files_per_block"]
         temp_rse = upload_options["dest_temp_rse"]
- 
-        
+
         lfns = register_temp_replicas(client=rclient, file_src_dst_list=lfn_src_dst,
-                            scope=rscope, rse=temp_rse,
-                            dry_run=dry_run)
+                                      scope=rscope, rse=temp_rse,
+                                      dry_run=dry_run)
 
         # 3. Create blocks for registered files and attach them
 
@@ -91,13 +82,10 @@ if __name__ == "__main__":
         register_blocks(client=rclient, scope=rscope, block_file_map=block_file_map, dry_run=dry_run)
         register_dataset(client=rclient, scope=rscope, name=dataset, blocks=block_file_map.keys(), dry_run=dry_run)
 
-
         # 4. Create Rules
 
-
         rule_did = {"scope": rscope, "name": dataset}
-        rule_id = create_rule(client=rclient, dids=[rule_did], options=rule_options, dry_run=dry_run)
+        rule_id = create_rule(dids=[rule_did], options=rule_options, dry_run=dry_run)
         rule_id = rule_id[0]
         printC(f"Rule created for dataset: {dataset}", bcolors.OKGREEN)
         printC(f"https://cms-rucio-webui.cern.ch/rule?rule_id={rule_id}", bcolors.OKBLUE)
-

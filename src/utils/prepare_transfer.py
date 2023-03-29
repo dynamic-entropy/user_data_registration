@@ -1,6 +1,7 @@
 import sys
 from src.utils.lfn2pfn import get_pfns_temp
 
+
 def get_src_and_dst_list(files, upload_options, account_options):
     """
     Provided a filename containing list of pfns
@@ -40,8 +41,7 @@ def get_src_and_dst_list(files, upload_options, account_options):
     return file_src_dst
 
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
 
     files = [
         "davs://deepthought.crc.nd.edu:1094/store/mc/Phase2HLTTDRSummer20ReRECOMiniAOD/TTToSemiLepton_TuneCP5_14TeV-powheg-pythia8/FEVT/PU200_111X_mcRun4_realistic_T15_v1-v1/120000/A0037171-FD6D-8B4E-A8D2-71CB77893C4A.root",

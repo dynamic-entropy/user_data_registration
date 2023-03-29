@@ -12,5 +12,6 @@ class bcolors:
 
 # TODO: Define logger instead
 
+
 def printC(message, color):
     print(f"{color} {message} {bcolors.ENDC}")
